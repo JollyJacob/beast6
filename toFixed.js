@@ -6,7 +6,7 @@
 
 
 
-function toFixed(value, precision) {
+function toFixed2(value, precision) {
     value = moveDecimal(value, precision);
     value = Math.round(value);
     value = moveDecimal(value, -1*precision);
@@ -47,7 +47,7 @@ function moveDecimal(value, places) {
 // Unfortunately, it seems to fail in a few test cases with small inaccuracies.
 // I think the problem is that it relies on adding a power of ten when rounding up.
 // That addition probably introduces tiny inaccuracies.
-function toFixed2(value, precision) {
+function toFixed(value, precision) {
     var stringVersion = value + "";
     var decimalLoc = stringVersion.indexOf(".");
     if (decimalLoc === -1) {
@@ -64,14 +64,17 @@ function toFixed2(value, precision) {
         digitLoc = decimalLoc + precision;
     }
 
+    
     // If the digit under consideration is 5 or greater, round up
-    var contributionFromRounding = 0;
+    // Default (round down) case:
+    var contributionFromRounding =  ( value < 0 ?   -1*Math.pow(10, -1*precision)  :  0  );
+    // Check if we need to round up:
     if (    digitLoc >= 0
             && digitLoc <= stringVersion.length-1
-            && parseInt(stringVersion[digitLoc]) >= 5   )
-    {
-        contributionFromRounding = Math.pow(10, -1*precision);
-        console.log(Math.pow(10, -1*precision));
+            && (value > 0 && parseInt(stringVersion[digitLoc]) >= 5) || (value < 0 && parseInt(stringVersion[digitLoc]) <= 5)
+    ) {
+        // Round up
+        contributionFromRounding += Math.pow(10, -1*precision);
     }
 
     // Set all digits to 0, starting at digitLoc
