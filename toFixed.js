@@ -6,7 +6,7 @@
 
 
 
-function toFixed2(value, precision) {
+function toFixed(value, precision) {
     value = moveDecimal(value, precision);
     value = Math.round(value);
     value = moveDecimal(value, -1*precision);
@@ -47,7 +47,7 @@ function moveDecimal(value, places) {
 // Unfortunately, it seems to fail in a few test cases with small inaccuracies.
 // I think the problem is that it relies on adding a power of ten when rounding up.
 // That addition probably introduces tiny inaccuracies.
-function toFixed(value, precision) {
+function toFixed2(value, precision) {
     var stringVersion = value + "";
     var decimalLoc = stringVersion.indexOf(".");
     if (decimalLoc === -1) {
