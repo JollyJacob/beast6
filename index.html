@@ -1,0 +1,49 @@
+<script type="text/javascript" src="toFixed.js"></script>
+<script type="text/javascript" src="simpletest.js"></script>
+
+<script>
+    
+    tests({
+    
+        'toFixed rounds 0.5 to nearest whole correctly': function() {
+            eq(toFixed(0.5, 0), 1);
+        },
+        'toFixed rounds 18.3804 to nearest whole correctly': function() {
+            eq(toFixed(18.3804, 0), 18);
+        },
+        'toFixed rounds -1.5 to nearest whole correctly': function() {
+            eq(toFixed(-1.5, 0), -1);
+        },
+        'toFixed rounds -1.76 to nearest whole correctly': function() {
+            eq(toFixed(-1.76, 0), -2);
+        },
+        'toFixed rounds 45.239 to nearest hundredth correctly': function() {
+            eq(toFixed(45.239, 2), 45.24);
+        },
+        'toFixed rounds 45.2 to nearest hundredth correctly': function() {
+            eq(toFixed(45.2, 2), 45.2);
+        },
+        'toFixed rounds 0.615 to nearest hundredth correctly': function() {
+            eq(toFixed(0.615, 2), 0.62);
+        },
+        'toFixed rounds 10.235 to nearest hundredth correctly': function() {
+            eq(toFixed(10.235, 2), 10.24);
+        },
+        'toFixed rounds 1.005 to nearest hundredth correctly': function() {
+            eq(toFixed(1.005, 2), 1.01);
+        },
+        'toFixed rounds 83225 to nearest thousand correctly': function() {
+            eq(toFixed(83225, -3), 83000);
+        },
+        'toFixed rounds 777 to nearest thousand correctly': function() {
+            eq(toFixed(777, -3), 1000);
+        },
+        'toFixed rounds 8 to nearest thousand correctly': function() {
+            eq(toFixed(8, -3), 0);
+        }
+
+        
+    
+    });
+
+</script>
